@@ -5,8 +5,9 @@ let expectedString = null; // the backend string_key the user clicked, e.g. "B3"
 function selectString(stringKey) {
     expectedString = stringKey;
 
-    const statusEl = document.getElementById("status");
-    if (statusEl) statusEl.textContent = `Selected ${stringKey}. Play it now...`;
+    const status = document.getElementById("status");
+    if (status) status.textContent = `Selected ${stringKey}. Play it now...`;
+
 
     startListening();
 }
