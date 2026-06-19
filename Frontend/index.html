@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +12,21 @@
     </div>
 
     <div class="audio-input">
+        <p id="status">Click a string from the list and play the guitar.</p>
+        <p id="Detected: "><span id="detected-note"></span></p>
+        <p id="Frequency: "><span id="Frequency"></span></p>
+        <button id="stop">Stop</button>
         
     </div>
 
     <div class="strings">
-        <button id="E">El</button>
+        <button id="Eh">El</button>
         <button id="A">A</button>
         <button id="D">D</button>
         <button id="G">G</button>
         <button id="B">B</button>
-        <button id="E-">Eh</button>
+        <button id="El">Eh</button>
     </div>
+    <script src="audio_processing.js"></script>
 </body>
 </html>
