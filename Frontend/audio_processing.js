@@ -20,10 +20,11 @@ async function startListening() {
     const source = audioContext.createMediaStreamSource(stream);
     const processor = audioContext.createScriptProcessor(4096, 1, 1);
 
-    socket = new WebSocket("ws://localhost:8000/ws/listen");
+    socket = new WebSocket("ws://127.0.0.1:8000/ws");
     socket.binaryType = "arraybuffer";
 
     socket.onmessage = (event) => {
+        console.log(event.data);
         const result = JSON.parse(event.data);
         if (result.status === "ok") {
             updateUI(result);
@@ -36,7 +37,8 @@ async function startListening() {
     processor.onaudioprocess = (e) => {
         const input = e.inputBuffer.getChannelData(0); // Float32Array, 1 channel
         if (socket.readyState === WebSocket.OPEN) {
-            socket.send(input.buffer);
+            console.log("sending", input.length);
+            socket.send(JSON.stringify({clicked_string:expectedString,audio:Array.from(input)}));
         }
     };
 }
@@ -76,7 +78,4 @@ document.addEventListener("DOMContentLoaded", () => {
             selectString(btn.dataset.string);
         });
     });
-
-    const stopBtn = document.getElementById("stop");
-    if (stopBtn) stopBtn.addEventListener("click", stopListening);
 });
